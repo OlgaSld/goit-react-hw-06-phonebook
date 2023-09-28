@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { ContactForm } from './ContactsForm/ContactForm';
 import { ContactsList } from './ContactList/ContactList';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Layout, Subtitle, Title } from './Layout';
 import { Filter } from './Filter/Filter';
-import { useLocalStorage } from './LocalStorage';
+// import { useLocalStorage } from './LocalStorage';
 
 // const contactData = [
 //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
