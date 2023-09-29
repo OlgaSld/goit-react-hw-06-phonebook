@@ -5,7 +5,6 @@ export const addContacts = createAction('contacts/addContact', contact => {
   return {
     payload: {
       id: nanoid(),
-      completed: false,
       contact,
     },
   };

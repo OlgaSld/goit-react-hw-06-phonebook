@@ -7,8 +7,10 @@ import {
   ErrorMsg,
   Button,
 } from './ContactForm_styled';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../Redux/ContactsSlice';
+import { addContact } from 'redux/ContactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { nanoid } from 'nanoid';
 
 const formSchema = Yup.object().shape({
   name: Yup.string()
@@ -32,12 +34,26 @@ const formSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form = event.target;
-    dispatch(addContact(form.elements.contact.name));
-    form.reset();
+  const handleSubmit = (values, actions) => {
+    const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: values.number,
+    };
+
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      )
+    ) {
+      alert(`${newContact.name} is already in contacts`);
+      return;
+    }
+
+    dispatch(addContact(newContact));
+    actions.resetForm();
   };
 
   return (
